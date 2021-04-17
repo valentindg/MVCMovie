@@ -71,24 +71,26 @@ namespace MVCMovie.Controllers
             {
                 return NotFound();
             }
-            
-            var movieDM = from m1 in _context.Movie where m1.Id == id select m1;
-            var comments = from c in _context.Comments select c;
-
-
-
-            var details = new DetailsViewModel
+            else
             {
-                Movies = await movieDM.ToListAsync(),
-                Comment = await comments.ToListAsync()   
-            };
-            
-            if (movieDM == null)
-            {
-                return NotFound();
+
+                var movieDM = from m1 in _context.Movie where m1.Id == id select m1;
+
+                //var comments = from c in _context.Comments select c;
+
+                var details = new DetailsViewModel
+                {
+                    Movies = await movieDM.ToListAsync(),
+                    //Comment = await comments.ToListAsync()
+                };
+
+                if (movieDM == null)
+                {
+                    return NotFound();
+                }
+
+                return View(details);
             }
-
-            return View(details);
         }
 
         //Get

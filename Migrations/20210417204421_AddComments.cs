@@ -13,6 +13,7 @@ namespace MVCMovie.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    MovieId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Review = table.Column<string>(nullable: true),
                     ReviewDate = table.Column<DateTime>(nullable: false)
