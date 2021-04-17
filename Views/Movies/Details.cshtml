@@ -68,12 +68,40 @@
             <a asp-action="Index">Back to List</a>
         </div>
     }
-    </div>
+</div>
+@foreach (var items in Model.Comment)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comment[0].Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comment[0].Review)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comment[0].ReviewDate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => items.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => items.Review)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => items.ReviewDate)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="col-md-4">
 
-
-<div class="col-md-4">
-    @foreach (var items in Model.Comment)
-    {
         <form asp-action="SendReview">
             <div class="form-group">
 
@@ -89,5 +117,5 @@
                 <input type="submit" value="SendReview" class="btn btn-primary" />
             </div>
         </form>
-    }
     </div>
+}

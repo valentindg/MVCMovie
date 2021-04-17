@@ -1,5 +1,4 @@
 ﻿@model MVCMovie.Models.MovieGenreViewModel
-@using PagedList.Mvc;
 
 @{
     ViewData["Title"] = "Index";
@@ -89,8 +88,22 @@
         }
     </tbody>
 </table>
-<br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-@Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+Page &nbsp;&nbsp;
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PagingList.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+    1
+</a>&nbsp;&nbsp;&nbsp;
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PagingList.TotalPages)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+    2
+</a>&nbsp;&nbsp;&nbsp;
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PagingList.TotalPages + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]">
+    3
+</a>

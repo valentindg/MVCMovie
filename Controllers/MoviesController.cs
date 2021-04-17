@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVCMovie.Data;
 using MVCMovie.Models;
-using PagedList;
 
 namespace MVCMovie.Controllers
 {
@@ -21,10 +20,9 @@ namespace MVCMovie.Controllers
         }
 
         // GET: Movies
-        public async Task<IActionResult> Index(string movieGenre, string searchString, string currentFilter, int? page)
+        public async Task<IActionResult> Index(string movieGenre, string searchString, string currentFilter, int? pageNumber)
         {
             int pageSize = 5;
-            int pageNumber = (page ?? 1);
 
             ViewData["CurrentSort"] = movieGenre;
 
@@ -55,9 +53,9 @@ namespace MVCMovie.Controllers
 
             var movieGenreVM = new MovieGenreViewModel
             {
-                PaginatedList = movies.ToPagedList(pageNumber, pageSize),
+                PagingList = await PaginatedList<Movie>.CreateAsync(movies.AsNoTracking(), pageNumber ?? 1, pageSize),
                 Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
-                Movies = await movies.ToListAsync()
+                Movies = await movies.ToListAsync(),
             };
             return View(movieGenreVM);
         }
@@ -76,6 +74,8 @@ namespace MVCMovie.Controllers
             
             var movieDM = from m1 in _context.Movie where m1.Id == id select m1;
             var comments = from c in _context.Comments select c;
+
+
 
             var details = new DetailsViewModel
             {
