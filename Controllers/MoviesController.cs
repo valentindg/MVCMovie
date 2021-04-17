@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVCMovie.Data;
 using MVCMovie.Models;
+using PagedList;
 
 namespace MVCMovie.Controllers
 {
@@ -20,9 +21,13 @@ namespace MVCMovie.Controllers
         }
 
         // GET: Movies
-        public async Task<IActionResult> Index(string movieGenre, string searchString, string currentFilter, int? pageNumber)
+        public async Task<IActionResult> Index(string movieGenre, string searchString, string currentFilter, int? page)
         {
-            int pageSize = 5; 
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            ViewData["CurrentSort"] = movieGenre;
+
             IQueryable<string> genreQuery = from m in _context.Movie orderby m.Genre select m.Genre;
 
             if (searchString != null)
@@ -50,7 +55,7 @@ namespace MVCMovie.Controllers
 
             var movieGenreVM = new MovieGenreViewModel
             {
-                PaginatedList = await PaginatedList<Movie>.CreateAsync(movies.AsNoTracking(), pageNumber ?? 1, pageSize),
+                PaginatedList = movies.ToPagedList(pageNumber, pageSize),
                 Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
                 Movies = await movies.ToListAsync()
             };
@@ -78,7 +83,7 @@ namespace MVCMovie.Controllers
                 Comment = await comments.ToListAsync()   
             };
             
-            if (movie == null)
+            if (movieDM == null)
             {
                 return NotFound();
             }

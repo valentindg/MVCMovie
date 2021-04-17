@@ -192,3 +192,5 @@ C:\Users\AS\Desktop\Test Stagiu Practica\MVCMovie\bin\Debug\netcoreapp3.1\runtim
 C:\Users\AS\Desktop\Test Stagiu Practica\MVCMovie\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Security.AccessControl.dll
 C:\Users\AS\Desktop\Test Stagiu Practica\MVCMovie\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\AS\Desktop\Test Stagiu Practica\MVCMovie\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
+C:\Users\AS\Desktop\Test Stagiu Practica\MVCMovie\obj\Debug\netcoreapp3.1\MVCMovie.csproj.CoreCompileInputs.cache
+C:\Users\AS\Desktop\Test Stagiu Practica\MVCMovie\obj\Debug\netcoreapp3.1\MVCMovie.MvcApplicationPartsAssemblyInfo.cache

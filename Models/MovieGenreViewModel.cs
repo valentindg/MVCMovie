@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PagedList;
 
 namespace MVCMovie.Models
 {
@@ -13,6 +14,6 @@ namespace MVCMovie.Models
         public SelectList Genres { get; set; }
         public string MovieGenre { get; set; }
         public string SearchString { get; set; }
-        public int PaginatedList { get; set; }
+        public IPagedList PaginatedList { get; set; }
     }
 }
