@@ -40,6 +40,8 @@ namespace MVCMovie.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MovieId");
+
                     b.ToTable("Comments");
                 });
 
@@ -82,6 +84,15 @@ namespace MVCMovie.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Movie");
+                });
+
+            modelBuilder.Entity("MVCMovie.Models.Comments", b =>
+                {
+                    b.HasOne("MVCMovie.Models.Movie", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

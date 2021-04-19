@@ -11,8 +11,9 @@ namespace MVCMovie.Models
     {
         public int Id { get; set; }
 
-        [ForeignKey("Id")]
-        public Movie MovieId { get; set; }
+        [ForeignKey("Movie")]
+        public int MovieId { get; set; }
+        public virtual Movie Movie { get; set; }
         public string Name { get; set; }
         public string Review { get; set; }
 

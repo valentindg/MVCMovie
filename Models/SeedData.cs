@@ -16,8 +16,8 @@ namespace MVCMovie.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<MvcMovieContext>>()))
             {
-                // Look for any movies.
-                if (context.Movie.Any())
+                // Look for any movies and comments.
+                if (context.Movie.Any() && context.Comments.Any())
                 {
                     return;   // DB has been seeded
                 }
@@ -59,6 +59,20 @@ namespace MVCMovie.Models
                         Rating = "R"
                     }
                 );
+
+                context.SaveChanges();
+
+                context.Comments.AddRange(
+                    new Comments
+                    {
+                        Name = "Will Scott",
+                        MovieId = 1,
+                        Review = "Such an intense movie, would definetly recommend it to anyone!",
+                        ReviewDate = DateTime.Now
+                    }
+
+                );
+
                 context.SaveChanges();
             }
         }

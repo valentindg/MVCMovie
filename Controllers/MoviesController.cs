@@ -76,12 +76,12 @@ namespace MVCMovie.Controllers
 
                 var movieDM = from m1 in _context.Movie where m1.Id == id select m1;
 
-                //var comments = from c in _context.Comments select c;
+                var comments = from c in _context.Comments select c;
 
                 var details = new DetailsViewModel
                 {
                     Movies = await movieDM.ToListAsync(),
-                    //Comment = await comments.ToListAsync()
+                    Comment = await comments.ToListAsync()
                 };
 
                 if (movieDM == null)
